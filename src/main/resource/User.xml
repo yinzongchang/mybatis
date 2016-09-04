@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yin.inter.IUserOperation">
+	<!-- <mapper namespace="com.yin.models.UserMapper"> -->
+	<resultMap type="com.yin.model.User" id="BaseResult">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="user_name" property="userName" jdbcType="VARCHAR" />
+		<result column="user_address" property="userAddress" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<select id="selectUserByID" parameterType="int" resultMap="BaseResult">
+		select * from `user` where id = #{id}
+	</select>
+
+	<select id="selectUserByIdInter" parameterType="int" resultMap="BaseResult">
+		select * from `user` where id = #{id}
+	</select>
+
+	<!-- 返回list 的select 语句，注意 resultMap 的值是指向前面定义好的 -->
+	<select id="selectUsers" parameterType="string" resultMap="BaseResult">
+		select * from user where user_name like #{userName}
+	</select>
+
+	<update id="updateUser" parameterType="User">
+		update user set
+		user_name=#{userName}, user_address=#{userAddress}
+		where id=#{id}
+	</update>
+
+</mapper>
